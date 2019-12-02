@@ -23,7 +23,7 @@ def get_filters():
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         city = input('Which city would you like to see data for Chicago, New York City, or Washington? -> ').lower()
-        if city in CITY_DATA.keys():    
+        if city in CITY_DATA.keys():
             # uses city_data to find matching keys in dictionary
             break
         else:
@@ -64,28 +64,28 @@ def load_data(city, month, day):
     """
     # loading data file into dataframe
     df = pd.read_csv(CITY_DATA[city])
-    
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.weekday_name
-    
+
     # filter by month if applicable
     if month != 'all':
         # use the index of the months list to get the corresponding int
         months = ['january','february','march','april','may','june']
-        month = months.index(month) + 1 
-        
+        month = months.index(month) + 1
+
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
-        
+
     # filter by day of week if applicable
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
-    
+
     return df
 
 
@@ -100,7 +100,7 @@ def time_stats(df):
     df['month'] = df['Start Time'].dt.month
     common_month = df['month'].mode()[0]
     print('Most common month: ', common_month)
-    
+
     # Display the most common day of week
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['weekday_name'] = df['Start Time'].dt.weekday_name
@@ -126,7 +126,7 @@ def station_stats(df):
     # Display most commonly used start station
     start_station = df['Start Station'].mode()[0]
     print('Most commonly used start station: ', start_station)
-    
+
     # Display most commonly used end station
     end_station = df['End Station'].mode()[0]
     print('Most commonly used end station: ', end_station)
@@ -134,7 +134,7 @@ def station_stats(df):
     # Display most frequent combination of start station and end station trip
     df['frequent_starstop'] = df['Start Station'] + 'from' + df['End Station']
     print('Most frequent start and stop station: ', df.frequent_starstop.mode().iloc[0])
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -148,7 +148,7 @@ def trip_duration_stats(df):
     # Display total travel time
     total_time = df['Trip Duration'].sum()
     print('Total Travel Time: ', total_time)
-    
+
     # Display mean travel time
     avg_time = df['Trip Duration'].mean()
     print('Average Travel Time: ', avg_time)
@@ -166,27 +166,27 @@ def user_stats(df):
     # Display counts of user types
     user_types = df['User Type'].value_counts()
     print('Count of User Types:', user_types)
-    
+
     # Display counts of gender
     if 'Gender' in df.columns:
         gender_types = df['Gender'].value_counts()
         print('Count of Gender Type:', gender_types)
     else:
         print('Sorry, no data to show')
-    
+
     # Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df.columns:
         earliest_year = df['Birth Year'].min()
         print('Oldest Year of birth date:', earliest_year)
-    
+
         recent_year = df['Birth Year'].max()
         print('Youngest Year of birth date:', recent_year)
 
         common_year = df['Birth Year'].mode()
-        print('Most common Year of birth:', common_year) 
+        print('Most common Year of birth:', common_year)
     else:
         print('Sorry, no data to show')
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -195,16 +195,16 @@ def more_data(df):
     # Asks user if they would like to veiw five rows of data
     more_data = input('Would you like to see 5 rows of data? (yes or no)\n').lower()
     if more_data == 'yes':
-        # checks user input for string value 
+        # checks user input for string value
         i = 0
         while True:
             print(df.iloc[i:i+5])
             i += 5
-            five_more = input('Would you like to see more!!? (yes or no)\n').lower()
+            five_more = input('Would you like to see 5 more rows!!? (yes or no)\n').lower()
             if five_more != 'yes':
                 # checks user input for sting value
                 break
-    
+
 def main():
     while True:
         city, month, day = get_filters()
