@@ -193,8 +193,8 @@ def user_stats(df):
 def more_data(df):
     """"Ask the user if they would like to see 5 rows of raw data. """
     # Asks user if they would like to veiw five rows of data
-    more_data = input('Would you like to see 5 rows of data? (yes or no)\n').lower()
-    if more_data == 'yes':
+    more = input('Would you like to see 5 rows of data? (yes or no)\n').lower()
+    if more == 'yes':
         # checks user input for string value
         i = 0
         while True:
