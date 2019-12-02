@@ -202,8 +202,8 @@ def more_data(df):
         while True:
             print(df.iloc[i:i+5])
             i += 5
-            five_more = input('Would you like to see more!!? (yes or no)\n').lower()
-            if five_more != 'yes':
+            five = input('Would you like to see 5 more rows!!? (yes or no)\n').lower()
+            if five != 'yes':
                 # checks user input for sting value
                 break
 
