@@ -7,7 +7,7 @@ README file created date 12/2/2019
 U.S. bikeshare data - Udacity Project, python
 
 ### Description
-Describe what your project is about and what it does
+Built an interactive environment for a user to filter and analyze U.S. bikeshare data with python as the primary coding language.
 
 ### Files used
 Include the files used
